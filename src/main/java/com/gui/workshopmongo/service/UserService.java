@@ -36,6 +36,26 @@ public class UserService {
 		return user;
 	}
 	
+	public User update(User obj ) {
+		Optional<User> objOptional = repo.findById(obj.getId());
+		User newUser = objOptional.get();
+		System.out.println(newUser.toString());
+		
+		updateData(newUser, obj);
+		
+		return repo.save(newUser);
+	}
+	
+
+	private void updateData(User newUser, User obj) {
+		// TODO Auto-generated method stub
+		
+		
+		newUser.setName(obj.getName() == null ? newUser.getName()  : obj.getName());
+		
+		newUser.setEmail(obj.getEmail() == null ? newUser.getEmail() : obj.getEmail());
+	}
+
 	public User insert(User obj) {
 		return repo.insert(obj);
 	}
